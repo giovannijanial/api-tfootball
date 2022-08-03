@@ -1,0 +1,3 @@
+interface CreateTeamDTO {
+	name: string;
+}
