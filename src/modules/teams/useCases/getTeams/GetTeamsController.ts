@@ -6,7 +6,7 @@ class GetTeamsController {
 		const getTeamsUseCase = new GetTeamsUseCase();
 
 		const result = await getTeamsUseCase.execute();
-		return res.status(201).json(result);
+		return res.status(200).json(result);
 	}
 }
 
