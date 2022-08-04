@@ -23,10 +23,12 @@ model Player {
 }
 
 model Team {
-  id      String         @id @default(uuid())
-  name    String
-  players Player[]
-  matches MatchesTeams[]
+  id         String         @id @default(uuid())
+  name       String         @unique
+  players    Player[]
+  matches    MatchesTeams[]
+  created_at DateTime       @default(now())
+  updated_at DateTime       @updatedAt
 
   @@map("teams")
 }

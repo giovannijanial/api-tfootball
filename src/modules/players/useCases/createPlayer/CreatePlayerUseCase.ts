@@ -1,5 +1,6 @@
 import { Player } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 import { CreatePlayerDTO } from "../../dtos/CreatePlayerDto";
 
 class CreatePlayerUseCase {
@@ -9,6 +10,7 @@ class CreatePlayerUseCase {
 		});
 
 		if (playerAlreadyExists) {
+			throw new AppError("User already exist!");
 		}
 
 		const teamExists = await prismaClient.team.findUnique({
@@ -18,6 +20,7 @@ class CreatePlayerUseCase {
 		});
 
 		if (!teamExists) {
+			throw new AppError("Team don't exist!");
 		}
 
 		const player = await prismaClient.player.create({
