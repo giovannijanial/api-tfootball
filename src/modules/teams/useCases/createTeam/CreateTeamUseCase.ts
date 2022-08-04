@@ -10,7 +10,7 @@ class CreateTeamUseCase {
 		});
 
 		if (teamAlreadyExists) {
-			throw new AppError("Team already exist!");
+			throw new AppError("Team already exist!", 422);
 		}
 
 		const team = await prismaClient.team.create({

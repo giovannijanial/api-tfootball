@@ -1,19 +1,24 @@
 import { Match } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 import { CreateMatchDTO } from "../../dtos/CreateMatchDto";
 
 class CreateMatchUseCase {
-	async execute({
-		date,
-		teamHomeId,
-		teamOutId,
-	}: CreateMatchDTO): Promise<Match> {
+	async execute(createMatchDTO: CreateMatchDTO): Promise<Match> {
+		const teamHomeExist = await prismaClient.team.findUnique({
+			where: { id: createMatchDTO.teamHomeId },
+		});
+
+		const teamOutExist = await prismaClient.team.findUnique({
+			where: { id: createMatchDTO.teamOutId },
+		});
+
+		if (!teamHomeExist || !teamOutExist) {
+			throw new AppError(`Team not found!`, 404);
+		}
+
 		const match = await prismaClient.match.create({
-			data: {
-				date,
-				teamHomeId,
-				teamOutId,
-			},
+			data: createMatchDTO,
 		});
 
 		return match;
