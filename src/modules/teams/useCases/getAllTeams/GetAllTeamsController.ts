@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GetTeamsUseCase } from "./GetTeamsUseCase";
+import { GetTeamsUseCase } from "./GetAllTeamsUseCase";
 
 class GetTeamsController {
 	async handle(req: Request, res: Response) {

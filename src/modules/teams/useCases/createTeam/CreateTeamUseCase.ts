@@ -1,6 +1,7 @@
 import { Team } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
+import { CreateTeamDTO } from "../../dtos/CreateTeamDto";
 
 class CreateTeamUseCase {
 	async execute({ name }: CreateTeamDTO): Promise<Team> {
