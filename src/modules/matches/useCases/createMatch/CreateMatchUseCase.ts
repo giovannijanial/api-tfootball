@@ -17,6 +17,10 @@ class CreateMatchUseCase {
 			throw new AppError(`Team not found!`, 404);
 		}
 
+		if (createMatchDTO.teamHomeId === createMatchDTO.teamOutId) {
+			throw new AppError(`The team cannot play against itself`);
+		}
+
 		const match = await prismaClient.match.create({
 			data: createMatchDTO,
 		});
