@@ -6,6 +6,8 @@
 - TypeScript
 - Express
 - Prisma
+- Docker
+- Postgres
 
 ## :rocket: How start
 - config .env
