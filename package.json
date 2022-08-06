@@ -6,7 +6,7 @@
 	"author": "Giovanni Janial <giovannijanial@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"dev": "cls && ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
+		"dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
 	},
 	"devDependencies": {
 		"typescript": "^4.7.4"
