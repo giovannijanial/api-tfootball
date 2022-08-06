@@ -14,7 +14,7 @@
   yarn dev
 ```
 
-## Test 
+## :globe_with_meridians: Test in web
 - Use Postman or Insomnia localhost:3000 and request routes of API!.
 
 ## :fleur_de_lis: Follow me!
