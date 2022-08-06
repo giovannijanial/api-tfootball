@@ -12,8 +12,8 @@
 ## :rocket: How start
 - config .env
 ```
-  yarn install
-  yarn dev
+ $ yarn install
+ $ yarn dev
 ```
 
 ## :globe_with_meridians: Test in web
