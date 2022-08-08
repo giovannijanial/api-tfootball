@@ -14,6 +14,11 @@ class GetPlayerByIdUseCase {
 						name: true,
 					},
 				},
+				position: {
+					select: {
+						name: true,
+					},
+				},
 			},
 		});
 

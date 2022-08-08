@@ -1,8 +1,8 @@
 import { Player } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
-import { CreatePlayerDTO } from "../../dtos/CreatePlayerDto";
 import { UpdatePlayerDTO } from "../../dtos/UpdatePlayerDto";
+import { preloadPositionByName } from "../../utils/PreloadPositionByName";
 
 class UpdatePlayerUseCase {
 	async execute(id: string, updatePlayerDTO: UpdatePlayerDTO): Promise<Player> {
@@ -29,11 +29,22 @@ class UpdatePlayerUseCase {
 			}
 		}
 
+		const position =
+			updatePlayerDTO.positionName &&
+			(await preloadPositionByName(updatePlayerDTO.positionName));
+
 		const player = await prismaClient.player.update({
 			where: {
 				id,
 			},
-			data: { ...updatePlayerDTO },
+			data: {
+				name: updatePlayerDTO.name,
+				age: updatePlayerDTO.age,
+				email: updatePlayerDTO.email,
+				password: updatePlayerDTO.password,
+				teamId: updatePlayerDTO.teamId,
+				positionId: position && position.id,
+			},
 		});
 
 		return player;

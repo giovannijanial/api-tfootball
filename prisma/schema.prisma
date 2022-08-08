@@ -17,11 +17,11 @@ model Player {
   email      String   @unique
   password   String
   position   Position @relation(fields: [positionId], references: [id])
+  positionId String
   team       Team     @relation(fields: [teamId], references: [id])
   teamId     String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  positionId String
 
   @@map("players")
 }
@@ -30,6 +30,8 @@ model Position {
   id      String   @id @default(uuid())
   name    String   @unique
   players Player[]
+
+  @@map("positions")
 }
 
 model Team {

@@ -8,6 +8,7 @@ class GetTeamsUseCase {
 				players: {
 					select: {
 						email: true,
+						position: true,
 					},
 				},
 			},

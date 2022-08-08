@@ -10,6 +10,11 @@ class GetPlayersUseCase {
 						name: true,
 					},
 				},
+				position: {
+					select: {
+						name: true,
+					},
+				},
 			},
 		});
 		return players;
