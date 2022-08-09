@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Player {
-  id         String   @id @default(uuid())
+  id         String     @id @default(uuid())
   name       String
   age        Decimal
-  email      String   @unique
+  email      String     @unique
   password   String
-  position   Position @relation(fields: [positionId], references: [id])
+  position   Position   @relation(fields: [positionId], references: [id])
   positionId String
-  team       Team?    @relation(fields: [teamId], references: [id])
-  teamId     String?
+  matches    MatchDay[]
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -34,25 +34,37 @@ model Position {
   @@map("positions")
 }
 
-model Team {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  players     Player[]
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  matchesHome Match[]  @relation("teamHome")
-  matchesOut  Match[]  @relation("teamOut")
-
-  @@map("teams")
-}
-
 model Match {
-  id         String   @id @default(uuid())
-  date       DateTime
-  teamHome   Team?    @relation("teamHome", fields: [teamHomeId], references: [id])
-  teamHomeId String?
-  teamOut    Team?    @relation("teamOut", fields: [teamOutId], references: [id])
-  teamOutId  String?
+  id      String     @id @default(uuid())
+  date    DateTime
+  players MatchDay[]
+
+  // teamHome        Team?    @relation("teamHome", fields: [teamHomeId], references: [id])
+  // teamHomeId      String?
+  // teamOut         Team?    @relation("teamOut", fields: [teamOutId], references: [id])
+  // teamOutId       String?
 
   @@map("matches")
 }
+
+model MatchDay {
+  player   Player @relation(fields: [playerId], references: [id])
+  playerId String
+  match    Match  @relation(fields: [matchId], references: [id])
+  matchId  String
+
+  @@id([playerId, matchId])
+  @@map("match-day")
+}
+
+// model Team {
+//   id          String   @id @default(uuid())
+//   name        String   @unique
+//   players     Player[]
+//   created_at  DateTime @default(now())
+//   updated_at  DateTime @updatedAt
+//   matchesHome Match[]  @relation("teamHome")
+//   matchesOut  Match[]  @relation("teamOut")
+
+//   @@map("teams")
+// }
