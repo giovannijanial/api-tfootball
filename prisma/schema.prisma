@@ -18,8 +18,8 @@ model Player {
   password   String
   position   Position @relation(fields: [positionId], references: [id])
   positionId String
-  team       Team     @relation(fields: [teamId], references: [id])
-  teamId     String
+  team       Team?    @relation(fields: [teamId], references: [id])
+  teamId     String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -49,10 +49,10 @@ model Team {
 model Match {
   id         String   @id @default(uuid())
   date       DateTime
-  teamHome   Team     @relation("teamHome", fields: [teamHomeId], references: [id])
-  teamHomeId String
-  teamOut    Team     @relation("teamOut", fields: [teamOutId], references: [id])
-  teamOutId  String
+  teamHome   Team?    @relation("teamHome", fields: [teamHomeId], references: [id])
+  teamHomeId String?
+  teamOut    Team?    @relation("teamOut", fields: [teamOutId], references: [id])
+  teamOutId  String?
 
   @@map("matches")
 }

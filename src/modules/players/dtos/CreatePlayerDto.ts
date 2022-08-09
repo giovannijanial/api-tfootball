@@ -4,7 +4,6 @@ interface CreatePlayerDTO {
 	email: string;
 	password: string;
 	positionName: string;
-	teamId: string;
 }
 
 export { CreatePlayerDTO };

@@ -11,7 +11,6 @@ class CreatePlayerUseCase {
 		age,
 		email,
 		password,
-		teamId,
 		positionName,
 	}: CreatePlayerDTO): Promise<Player> {
 		const playerAlreadyExists = await prismaClient.player.findUnique({
@@ -22,18 +21,9 @@ class CreatePlayerUseCase {
 			throw new AppError("User already exist!");
 		}
 
-		const teamExists = await prismaClient.team.findUnique({
-			where: {
-				id: teamId,
-			},
-		});
-
-		if (!teamExists) {
-			throw new AppError("Team don't exist!");
-		}
-
 		const position = await preloadPositionByName(positionName);
 		const hashedPassword = await hash(password, 4);
+		console.log(position);
 
 		const player = await prismaClient.player.create({
 			data: {
@@ -41,7 +31,6 @@ class CreatePlayerUseCase {
 				age,
 				email,
 				password: hashedPassword,
-				teamId,
 				positionId: position.id,
 			},
 		});
