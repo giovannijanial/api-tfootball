@@ -9,8 +9,16 @@ class GetMatchByIdUseCase {
 				id,
 			},
 			include: {
-				teamHome: true,
-				teamOut: true,
+				playerCaptain: true,
+				players: {
+					select: {
+						player: {
+							select: {
+								email: true,
+							},
+						},
+					},
+				},
 			},
 		});
 

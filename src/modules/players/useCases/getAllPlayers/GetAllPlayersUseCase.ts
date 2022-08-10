@@ -5,14 +5,18 @@ class GetPlayersUseCase {
 	async execute(): Promise<Player[]> {
 		const players = await prismaClient.player.findMany({
 			include: {
-				team: {
+				position: {
 					select: {
 						name: true,
 					},
 				},
-				position: {
+				matches: {
 					select: {
-						name: true,
+						match: {
+							select: {
+								id: true,
+							},
+						},
 					},
 				},
 			},

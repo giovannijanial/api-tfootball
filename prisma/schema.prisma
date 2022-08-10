@@ -11,17 +11,17 @@ datasource db {
 }
 
 model Player {
-  id         String     @id @default(uuid())
-  name       String
-  age        Decimal
-  email      String     @unique
-  password   String
-  position   Position   @relation(fields: [positionId], references: [id])
-  positionId String
-  matches    MatchDay[]
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id           String           @id @default(uuid())
+  name         String
+  age          Decimal
+  email        String           @unique
+  password     String
+  position     Position         @relation(fields: [positionId], references: [id])
+  positionId   String
+  matches      MatchesPlayers[]
+  matchCaptain Match[]
+  created_at   DateTime         @default(now())
+  updated_at   DateTime         @updatedAt
 
   @@map("players")
 }
@@ -35,36 +35,30 @@ model Position {
 }
 
 model Match {
-  id      String     @id @default(uuid())
-  date    DateTime
-  players MatchDay[]
-
-  // teamHome        Team?    @relation("teamHome", fields: [teamHomeId], references: [id])
-  // teamHomeId      String?
-  // teamOut         Team?    @relation("teamOut", fields: [teamOutId], references: [id])
-  // teamOutId       String?
+  id              String           @id @default(uuid())
+  date            DateTime
+  playerCaptainId String
+  playerCaptain   Player           @relation(fields: [playerCaptainId], references: [id])
+  players         MatchesPlayers[]
 
   @@map("matches")
 }
 
-model MatchDay {
+model MatchesPlayers {
   player   Player @relation(fields: [playerId], references: [id])
   playerId String
   match    Match  @relation(fields: [matchId], references: [id])
   matchId  String
 
   @@id([playerId, matchId])
-  @@map("match-day")
+  @@map("matches-players")
 }
 
-// model Team {
-//   id          String   @id @default(uuid())
-//   name        String   @unique
-//   players     Player[]
-//   created_at  DateTime @default(now())
-//   updated_at  DateTime @updatedAt
-//   matchesHome Match[]  @relation("teamHome")
-//   matchesOut  Match[]  @relation("teamOut")
+model Team {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-//   @@map("teams")
-// }
+  @@map("teams")
+}

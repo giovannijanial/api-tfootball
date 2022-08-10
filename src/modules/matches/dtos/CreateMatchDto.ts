@@ -1,7 +1,6 @@
 interface CreateMatchDTO {
 	date: Date;
-	teamHomeId: string;
-	teamOutId: string;
+	playerCaptainId: string;
 }
 
 export { CreateMatchDTO };

@@ -9,14 +9,18 @@ class GetPlayerByIdUseCase {
 				id,
 			},
 			include: {
-				team: {
+				position: {
 					select: {
 						name: true,
 					},
 				},
-				position: {
+				matches: {
 					select: {
-						name: true,
+						match: {
+							select: {
+								id: true,
+							},
+						},
 					},
 				},
 			},
