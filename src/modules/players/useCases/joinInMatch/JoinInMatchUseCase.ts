@@ -23,8 +23,6 @@ class JoinMatchUseCase {
 			throw new AppError(`Player Id ${matchId} don't exist!`);
 		}
 
-		console.log(playerExist);
-
 		const playerAlreadyInMatch = playerExist.matches.find(
 			(match) => match.matchId === matchId
 		);
@@ -33,14 +31,14 @@ class JoinMatchUseCase {
 			throw new AppError(`Player Id ${matchId} already in the match!`);
 		}
 
-		const matchPlayers = await prismaClient.matchesPlayers.create({
+		const matchesPlayers = await prismaClient.matchesPlayers.create({
 			data: {
 				playerId,
 				matchId,
 			},
 		});
 
-		return matchPlayers;
+		return matchesPlayers;
 	}
 }
 

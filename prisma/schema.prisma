@@ -45,20 +45,22 @@ model Match {
 }
 
 model MatchesPlayers {
-  player   Player @relation(fields: [playerId], references: [id])
+  player   Player  @relation(fields: [playerId], references: [id])
   playerId String
-  match    Match  @relation(fields: [matchId], references: [id])
+  match    Match   @relation(fields: [matchId], references: [id])
   matchId  String
+  team     Team?   @relation(fields: [teamId], references: [id])
+  teamId   String?
 
   @@id([playerId, matchId])
   @@map("matches-players")
 }
 
 model Team {
-  id         String   @id @default(uuid())
-  name       String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id             String           @id @default(uuid())
+  MatchesPlayers MatchesPlayers[]
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
 
   @@map("teams")
 }
