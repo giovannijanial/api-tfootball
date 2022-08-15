@@ -13,14 +13,14 @@ class UpdateMatchUseCase {
 			throw new AppError(`Match Id: ${id} don't exist!`, 404);
 		}
 
-		const team = await prismaClient.match.update({
+		const match = await prismaClient.match.update({
 			where: {
 				id,
 			},
 			data: { ...updateMatchDTO },
 		});
 
-		return team;
+		return match;
 	}
 }
 

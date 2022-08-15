@@ -1,19 +1,16 @@
 import { Request, Response } from "express";
-import { CreateMatchUseCase } from "./DrawMatchTeamsUseCase";
+import { DrawMatchTeamsUseCase } from "./DrawMatchTeamsUseCase";
 
-class CreateMatchController {
+class DrawMatchTeamsController {
 	async handle(req: Request, res: Response) {
 		const { matchId } = req.body;
 
-		const createMatchUseCase = new DrawMatchTeamsUseCase();
+		const drawMatchTeamsUseCase = new DrawMatchTeamsUseCase();
 
-		const result = await createMatchUseCase.execute({
-			date,
-			playerCaptainId,
-		});
+		const result = await drawMatchTeamsUseCase.execute(matchId);
 
 		return res.status(201).json(result);
 	}
 }
 
-export { CreateMatchController };
+export { DrawMatchTeamsController };
