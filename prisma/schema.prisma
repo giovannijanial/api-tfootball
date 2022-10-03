@@ -16,8 +16,8 @@ model Player {
   age          Decimal
   email        String           @unique
   password     String
-  position     Position         @relation(fields: [positionId], references: [id])
   positionId   String
+  position     Position         @relation(fields: [positionId], references: [id])
   matches      MatchesPlayers[]
   matchCaptain Match[]
   created_at   DateTime         @default(now())
@@ -45,6 +45,7 @@ model Match {
 }
 
 model MatchesPlayers {
+  id       String  @id @default(uuid())
   player   Player  @relation(fields: [playerId], references: [id])
   playerId String
   match    Match   @relation(fields: [matchId], references: [id])
@@ -52,7 +53,6 @@ model MatchesPlayers {
   team     Team?   @relation(fields: [teamId], references: [id])
   teamId   String?
 
-  @@id([playerId, matchId])
   @@map("matches-players")
 }
 
