@@ -5,10 +5,9 @@ class GetTeamsUseCase {
 	async execute(): Promise<Team[]> {
 		const teams = await prismaClient.team.findMany({
 			include: {
-				players: {
+				MatchesPlayers: {
 					select: {
-						email: true,
-						position: true,
+						player: true,
 					},
 				},
 			},

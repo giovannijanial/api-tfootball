@@ -17,6 +17,7 @@ class GetMatchesUseCase {
 								email: true,
 							},
 						},
+						teamId: true,
 					},
 				},
 			},

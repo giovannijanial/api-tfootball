@@ -47,7 +47,6 @@ class DrawMatchTeamsUseCase {
 					teamId: teamOut.id,
 				},
 			});
-			console.log(updated);
 		}
 
 		return { teamHome, teamOut };
