@@ -24,27 +24,21 @@ class DrawMatchTeamsUseCase {
 		const teamOut = await prismaClient.team.create({ data: {} });
 
 		let arrShuffle = shuffleArray(matchPlayers);
-		for (let i = 0; i < quantityPlayers / 2; i++) {
-			const player = arrShuffle.pop();
-			if (player) {
-				await prismaClient.matchesPlayers.update({
-					where: {
-						id: player.id,
-					},
-					data: {
-						teamId: teamHome.id,
-					},
-				});
+		arrShuffle.forEach((player, index) => {
+			if (index % 2 === 0) {
+				player.teamId == teamHome.id;
+			} else {
+				player.teamId == teamHome.id;
 			}
-			arrShuffle = shuffleArray(arrShuffle);
-		}
+		});
+
 		for (const player of arrShuffle) {
-			const updated = await prismaClient.matchesPlayers.update({
+			await prismaClient.matchesPlayers.update({
 				where: {
 					id: player.id,
 				},
 				data: {
-					teamId: teamOut.id,
+					teamId: player.teamId,
 				},
 			});
 		}
