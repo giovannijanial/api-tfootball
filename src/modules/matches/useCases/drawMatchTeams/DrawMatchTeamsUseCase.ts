@@ -28,7 +28,7 @@ class DrawMatchTeamsUseCase {
 			if (index % 2 === 0) {
 				player.teamId == teamHome.id;
 			} else {
-				player.teamId == teamHome.id;
+				player.teamId == teamOut.id;
 			}
 		});
 
