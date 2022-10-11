@@ -1,8 +1,8 @@
 import { Player } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
+import { preloadPositionByName } from "../../../../utils/PreloadPositionByName";
 import { UpdatePlayerDTO } from "../../dtos/UpdatePlayerDto";
-import { preloadPositionByName } from "../../utils/PreloadPositionByName";
 
 class UpdatePlayerUseCase {
 	async execute(id: string, updatePlayerDTO: UpdatePlayerDTO): Promise<Player> {
@@ -42,7 +42,6 @@ class UpdatePlayerUseCase {
 				age: updatePlayerDTO.age,
 				email: updatePlayerDTO.email,
 				password: updatePlayerDTO.password,
-				teamId: updatePlayerDTO.teamId,
 				positionId: position && position.id,
 			},
 		});

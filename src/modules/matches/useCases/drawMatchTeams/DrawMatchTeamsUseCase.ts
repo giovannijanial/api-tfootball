@@ -1,7 +1,7 @@
 import { MatchesPlayers, prisma } from "@prisma/client";
 import { prismaClient } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
-import { shuffleArray } from "../../../players/utils/ShuffleArray";
+import { shuffleArray } from "../../../../utils/ShuffleArray";
 
 class DrawMatchTeamsUseCase {
 	async execute(matchId: string) {
@@ -17,7 +17,6 @@ class DrawMatchTeamsUseCase {
 			throw new AppError(`Match Id ${matchId} not exist!`);
 		}
 
-		const quantityPlayers = matchExist.players.length;
 		const matchPlayers = matchExist.players;
 
 		const teamHome = await prismaClient.team.create({ data: {} });

@@ -3,7 +3,7 @@ import { hash } from "bcryptjs";
 import { prismaClient } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 import { CreatePlayerDTO } from "../../dtos/CreatePlayerDto";
-import { preloadPositionByName } from "../../utils/PreloadPositionByName";
+import { preloadPositionByName } from "../../../../utils/PreloadPositionByName";
 
 class CreatePlayerUseCase {
 	async execute({
